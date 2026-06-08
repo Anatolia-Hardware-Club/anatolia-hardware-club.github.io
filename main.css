@@ -1,7 +1,7 @@
 :root{
-	--primary: #90373d; /* logo red (approx) */
+	--primary: #c07145; /* logo red (approx) */
 	--dark: #18656f;    /* navy background */
-	--accent: #c07145;  /* warm accent */
+	--accent: #90373d;  /* warm accent */
 	--panel-bg: #18656f;
 	--muted-white: #FFFFFFCC;
 }
