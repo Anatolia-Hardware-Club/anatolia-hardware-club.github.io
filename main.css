@@ -1,8 +1,12 @@
 #textBody {
 	flex: 1;
-	padding: 20px;
+	padding: 28px;
 	text-align: center;
 	color: #FFFFFF;
+	max-width: 900px;
+	margin: 24px;
+	border-radius: 8px;
+	background-color: rgba(0,0,0,0.18);
 }
 
 h1 {
@@ -48,10 +52,15 @@ body {
 	min-height: 100vh;
 	margin: 0;
 	font-family: Arial, sans-serif;
-	background-color: #F5F1E3;
+	background-color: #003153;
 }
 
+/* Center content inside the full-viewport background */
 #backgroundBody {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-position: center center;
@@ -66,15 +75,19 @@ body {
 }
 
 .fa {
-	padding: 20px;
-	font-size: 30px;
-	width: 30px;
+	padding: 10px;
+	font-size: 20px;
+	width: 40px;
+	height: 40px;
 	text-align: center;
 	text-decoration: none;
-	margin: 5px 2px;
+	margin: 6px 4px;
 	border-radius: 50%;
-	background: #003153;
+	background: #ffffff22;
 	color: #FFFFFF;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .social-links .fa {
@@ -95,4 +108,42 @@ body {
 
 .social-links .fa:hover {
 	opacity: 0.7;
+}
+
+/* show a visible focus ring for keyboard users */
+.fa:focus {
+	outline: 3px solid #FFD166;
+	outline-offset: 3px;
+}
+
+/* small helper for screen-reader-only text */
+.sr-only {
+	position: absolute !important;
+	width: 1px !important;
+	height: 1px !important;
+	padding: 0 !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	clip: rect(0, 0, 0, 0) !important;
+	white-space: nowrap !important;
+	border: 0 !important;
+}
+
+.site-header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 18px 12px 0 12px;
+}
+
+.logo {
+	max-width: 140px;
+	height: auto;
+}
+
+.site-footer {
+	text-align: center;
+	font-size: 0.9em;
+	color: #FFFFFFCC;
+	padding: 18px 12px;
 }

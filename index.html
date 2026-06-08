@@ -1,25 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Anatolia Hardware Club — community for hardware, embedded systems, robotics, and open-source projects based in Ankara.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="main.css" rel="stylesheet">
     <title>Anatolia Hardware Club Official Website</title>
     <link rel="icon" href="image/Logo.png" type="image/png">
     </head> 
     <body id="backgroundBody">
-        <div id="textBody">
+        <header aria-label="Site header" class="site-header">
+            <img src="image/Logo.png" alt="Anatolia Hardware Club logo" class="logo">
+        </header>
+
+        <main id="textBody" role="main">
             <h1>Anatolia Hardware Club</h1>
             <p class="subtitle">Technology & Hardware Club</p>
             <p class="description">Welcome to the Anatolia Hardware Club! We are a group of technology enthusiasts dedicated to exploring the latest hardware innovations and sharing our knowledge with the community.</p>
-            <div class="social-links">
-                <a href="tel:05453167469" class="fa fa-phone" target="_blank" rel="noopener noreferrer"></a>
-                <a href="tel:05528550348" class="fa fa-phone" target="_blank" rel="noopener noreferrer"></a>
-                <a href="mailto:anatoliahardwareclub@gmail.com" class="fa fa-envelope" target="_blank" rel="noopener noreferrer"></a>
-                <a href="https://www.instagram.com/anatoliahardwareclub" class="fa fa-instagram" target="_blank" rel="noopener noreferrer"></a>
-                <a href="https://github.com/Anatolia-Hardware-Club" class="fa fa-github" target="_blank" rel="noopener noreferrer"></a>
+
+            <div class="social-links" aria-label="Contact and social links">
+                <a href="tel:05453167469" class="fa fa-phone" aria-label="Call Ozan"></a>
+                <a href="tel:05528550348" class="fa fa-phone" aria-label="Call Nusret"></a>
+                <a href="mailto:anatoliahardwareclub@gmail.com" class="fa fa-envelope" aria-label="Email the club"></a>
+                <a href="https://www.instagram.com/anatoliahardwareclub" class="fa fa-instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"></a>
+                <a href="https://github.com/Anatolia-Hardware-Club" class="fa fa-github" target="_blank" rel="noopener noreferrer" aria-label="GitHub"></a>
             </div>
-        </div>
+        </main>
+
+        <footer class="site-footer" role="contentinfo">
+            <p>Open-source projects and resources available on our <a href="https://github.com/Anatolia-Hardware-Club" target="_blank" rel="noopener noreferrer">GitHub organization</a>.</p>
+            <p>&copy; 2026 Anatolia Hardware Club</p>
+        </footer>
     </body>
 </html>
