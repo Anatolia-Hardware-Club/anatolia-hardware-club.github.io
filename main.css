@@ -1,3 +1,11 @@
+:root{
+	--primary: #D7263D; /* logo red (approx) */
+	--dark: #003153;    /* navy background */
+	--accent: #FFD166;  /* warm accent */
+	--panel-bg: rgba(215,38,61,0.12);
+	--muted-white: #FFFFFFCC;
+}
+
 #textBody {
 	flex: 1;
 	padding: 28px;
@@ -6,7 +14,7 @@
 	max-width: 900px;
 	margin: 24px;
 	border-radius: 8px;
-	background-color: rgba(0,0,0,0.18);
+	background-color: var(--panel-bg);
 }
 
 h1 {
@@ -46,13 +54,14 @@ h1 {
 	}
 }
 
+
 body {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
 	margin: 0;
 	font-family: Arial, sans-serif;
-	background-color: #003153;
+	background-color: var(--dark);
 }
 
 /* Center content inside the full-viewport background */
@@ -65,7 +74,7 @@ body {
 	background-attachment: fixed;
 	background-position: center center;
 	background-size: cover;
-	background-color: #003153;
+	background-color: var(--dark);
 }
 
 @media (max-width: 600px) {
@@ -83,7 +92,7 @@ body {
 	text-decoration: none;
 	margin: 6px 4px;
 	border-radius: 50%;
-	background: #ffffff22;
+	background: var(--primary);
 	color: #FFFFFF;
 	display: inline-flex;
 	align-items: center;
@@ -112,7 +121,7 @@ body {
 
 /* show a visible focus ring for keyboard users */
 .fa:focus {
-	outline: 3px solid #FFD166;
+	outline: 3px solid var(--accent);
 	outline-offset: 3px;
 }
 
@@ -144,6 +153,6 @@ body {
 .site-footer {
 	text-align: center;
 	font-size: 0.9em;
-	color: #FFFFFFCC;
+	color: var(--muted-white);
 	padding: 18px 12px;
 }
