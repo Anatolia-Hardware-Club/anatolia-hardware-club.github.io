@@ -156,3 +156,74 @@ body {
 	color: var(--muted-white);
 	padding: 18px 12px;
 }
+
+/* Charter CTA on homepage */
+.charter-cta {
+	margin-top: 14px;
+}
+.charter-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	padding: 10px 16px;
+	border-radius: 6px;
+	text-decoration: none;
+	background: transparent;
+	color: var(--muted-white);
+	border: 2px solid var(--primary);
+	font-weight: 600;
+}
+.charter-link i {
+	font-size: 1.1em;
+	color: var(--primary);
+	background: transparent;
+}
+.charter-link:hover {
+	background: var(--primary);
+	color: #00293a;
+}
+
+/* Charter page styles */
+.charter h1 {
+	font-size: 1.6em;
+	color: var(--primary);
+	margin-bottom: 4px;
+}
+.charter h2 {
+	font-size: 1.15em;
+	color: var(--muted-white);
+	margin-top: 18px;
+}
+.charter h3 {
+	color: var(--muted-white);
+}
+.charter p, .charter li {
+	color: var(--muted-white);
+	line-height: 1.6;
+}
+.charter .signatures {
+	display: flex;
+	gap: 32px;
+	margin-top: 18px;
+	flex-wrap: wrap;
+}
+.charter .sig {
+	min-width: 180px;
+}
+.charter .print-note {
+	margin-top: 22px;
+	font-size: 0.95em;
+	color: var(--muted-white);
+}
+
+@media (min-width: 800px) {
+	.charter h1 { font-size: 2em; }
+}
+
+@media print {
+	/* Strip decorative backgrounds, show clean black-on-white for printing */
+	body, #backgroundBody { background: white !important; }
+	#textBody { background: none !important; color: #000 !important; max-width: 100% !important; margin: 0 !important; padding: 0.5in !important; }
+	.charter p, .charter li { color: #000 !important; }
+	.charter-link, .site-header, .site-footer, .charter-cta { display: none !important; }
+}
