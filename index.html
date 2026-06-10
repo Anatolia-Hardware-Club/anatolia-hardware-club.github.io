@@ -1,42 +1,807 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Anatolia Hardware Club — community for hardware, embedded systems, robotics, and open-source projects based in Ankara.">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="main.css" rel="stylesheet">
-    <title>Anatolia Hardware Club Official Website</title>
-    <link rel="icon" href="image/Logo.png" type="image/png">
-    </head> 
-    <body id="backgroundBody">
-        <header aria-label="Site header" class="site-header">
-            <img src="image/Logo.png" alt="Anatolia Hardware Club logo" class="logo">
-        </header>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Anatolia Hardware Club — hardware, embedded systems, robotics, and open-source projects based in Ankara." />
+  <title>Anatolia Hardware Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        <main id="textBody" role="main">
-            <h1>Anatolia Hardware Club</h1>
-            <p class="subtitle">Technology & Hardware Club</p>
-            <p class="description">Welcome to the Anatolia Hardware Club! We are a group of technology enthusiasts dedicated to exploring the latest hardware innovations and sharing our knowledge with the community.</p>
+    :root {
+      --bg:        #0a0c10;
+      --bg2:       #111318;
+      --bg3:       #181b22;
+      --border:    #232733;
+      --accent:    #4ade80;
+      --accent2:   #22d3ee;
+      --text:      #e2e8f0;
+      --muted:     #64748b;
+      --mono:      'JetBrains Mono', monospace;
+      --sans:      'Inter', sans-serif;
+    }
 
-            <div class="social-links" aria-label="Contact and social links">
-                <a href="tel:05453167469" class="fa fa-phone" aria-label="Call Ozan"></a>
-                <a href="tel:05528550348" class="fa fa-phone" aria-label="Call Nusret"></a>
-                <a href="mailto:anatoliahardwareclub@gmail.com" class="fa fa-envelope" aria-label="Email the club"></a>
-                <a href="https://www.instagram.com/anatoliahardwareclub" class="fa fa-instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"></a>
-                <a href="https://github.com/Anatolia-Hardware-Club" class="fa fa-github" target="_blank" rel="noopener noreferrer" aria-label="GitHub"></a>
-            </div>
-            <div class="charter-cta">
-                <a href="charter.html" class="charter-link" aria-label="Read the official charter">
-                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                    <span>Read Charter</span>
-                </a>
-            </div>
-        </main>
+    html { scroll-behavior: smooth; }
 
-        <footer class="site-footer" role="contentinfo">
-            <p>Open-source projects and resources available on our <a href="https://github.com/Anatolia-Hardware-Club" target="_blank" rel="noopener noreferrer">GitHub organization</a>.</p>
-            <p>&copy; 2026 Anatolia Hardware Club</p>
-        </footer>
-    </body>
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,12,16,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--muted); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* language toggle */
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+    }
+    .lang-toggle button {
+      background: none;
+      border: none;
+      padding: 4px 10px;
+      cursor: pointer;
+      color: var(--muted);
+      transition: background 0.15s, color 0.15s;
+    }
+    .lang-toggle button.active {
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: calc(100vh - 60px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* grid background */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+    /* radial fade over grid */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, transparent 0%, var(--bg) 100%);
+      pointer-events: none;
+    }
+
+    .hero-inner { position: relative; z-index: 1; max-width: 680px; }
+
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-logo {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      margin-bottom: 1.5rem;
+      filter: drop-shadow(0 0 18px rgba(74,222,128,0.25));
+    }
+
+    h1 {
+      font-family: var(--mono);
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      line-height: 1.15;
+      margin-bottom: 0.35rem;
+    }
+    h1 .accent { color: var(--accent); }
+
+    .hero-sub {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      color: #94a3b8;
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.75;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.65rem 1.4rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+    }
+    .btn-primary:hover { background: #86efac; }
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+    .btn-outline:hover { background: rgba(74,222,128,0.08); }
+    .btn-donation {
+      background: var(--accent2);
+      color: #000;
+      font-weight: 700;
+    }
+    .btn-donation:hover { background: #67e8f9; }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 5rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent2);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    h2 {
+      font-family: var(--mono);
+      font-size: clamp(1.3rem, 3vw, 1.9rem);
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: 2rem;
+    }
+
+    .about-card {
+      background: var(--bg2);
+      padding: 1.75rem;
+    }
+
+    .about-card-icon {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .about-card h3 {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+
+    .about-card p {
+      font-size: 0.9rem;
+      color: #94a3b8;
+      line-height: 1.7;
+    }
+
+    .mission-text {
+      font-size: 1rem;
+      color: #94a3b8;
+      line-height: 1.8;
+      border-left: 3px solid var(--accent);
+      padding-left: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    /* ── MEMBERS ── */
+    .members-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .member-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .member-card:hover { border-color: var(--accent); }
+
+    .member-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .member-name {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+
+    .member-role {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--accent2);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── CHARTER ── */
+    .charter-box {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+
+    .charter-meta {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .charter-articles {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .charter-articles li {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .art-num {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      min-width: 40px;
+      padding-top: 2px;
+      letter-spacing: 0.06em;
+    }
+
+    .art-body h4 {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    .art-body p {
+      font-size: 0.87rem;
+      color: #94a3b8;
+      line-height: 1.65;
+    }
+
+    .charter-dl {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .contact-item {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .contact-item:hover {
+      border-color: var(--accent);
+      background: var(--bg3);
+    }
+
+    .contact-icon { font-size: 1.3rem; flex-shrink: 0; }
+
+    .contact-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .contact-val {
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 0 1rem; }
+      .nav-links { gap: 1rem; }
+      .nav-links li:nth-child(1),
+      .nav-links li:nth-child(2),
+      .nav-links li:nth-child(3) { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      section { padding: 3.5rem 1.25rem; }
+    }
+
+    /* ── UTIL ── */
+    [data-lang] { display: none; }
+    [data-lang].active { display: block; }
+    .inline-lang { display: none; }
+    .inline-lang.active { display: inline; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">AHC<span>://</span></a>
+  <ul class="nav-links">
+    <li><a href="#about" data-lang="en" class="inline-lang active">About</a><a href="#about" data-lang="tr" class="inline-lang">Hakkımızda</a></li>
+    <li><a href="#members" data-lang="en" class="inline-lang active">Members</a><a href="#members" data-lang="tr" class="inline-lang">Ekip</a></li>
+    <li><a href="#charter" data-lang="en" class="inline-lang active">Charter</a><a href="#charter" data-lang="tr" class="inline-lang">Tüzük</a></li>
+    <li><a href="#contact" data-lang="en" class="inline-lang active">Contact</a><a href="#contact" data-lang="tr" class="inline-lang">İletişim</a></li>
+    <li><a href="https://hcb.hackclub.com/donations/start/anatolia-hardware-club" target="_blank" rel="noopener" class="btn btn-donation" style="padding: 4px 10px; font-size: 0.7rem;">Donate</a></li>
+  </ul>
+  <div class="lang-toggle">
+    <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+    <button id="btn-tr" onclick="setLang('tr')">TR</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Ankara, Turkey · Est. 2026</div>
+    <img src="https://anatolia-hardware-club.github.io/image/Logo.png" alt="AHC Logo" class="hero-logo" />
+    <h1>Anatolia <span class="accent">Hardware</span> Club</h1>
+    <div class="hero-sub">// open-source · embedded · robotics · diy</div>
+    <p class="hero-desc">
+      <span data-lang="en" class="active">An independent youth organization exploring hardware development, embedded systems, robotics, and open-source technology — built by and for young makers.</span>
+      <span data-lang="tr">Donanım geliştirme, gömülü sistemler, robotik ve açık kaynak teknolojilerini keşfeden bağımsız bir gençlik organizasyonu — genç yapımcılar tarafından, genç yapımcılar için.</span>
+    </p>
+    <div class="hero-cta">
+      <a href="https://github.com/Anatolia-Hardware-Club" class="btn btn-primary" target="_blank" rel="noopener">GitHub →</a>
+      <a href="https://hcb.hackclub.com/donations/start/anatolia-hardware-club" class="btn btn-donation" target="_blank" rel="noopener">
+        <span data-lang="en" class="inline-lang active">Support Us</span>
+        <span data-lang="tr" class="inline-lang">Destek Olun</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<section id="about">
+  <div class="section-label">01 —
+    <span data-lang="en" class="inline-lang active">About</span>
+    <span data-lang="tr" class="inline-lang">Hakkımızda</span>
+  </div>
+  <h2>
+    <span data-lang="en" class="inline-lang active">Mission & Identity</span>
+    <span data-lang="tr" class="inline-lang">Misyon & Kimlik</span>
+  </h2>
+
+  <p class="mission-text">
+    <span data-lang="en" class="inline-lang active">AHC is an independent civil youth movement, not affiliated with any educational or political institution. We exist to enable young people to freely develop theoretical and practical skills in hardware and open-source software — and to share that knowledge with the world.</span>
+    <span data-lang="tr" class="inline-lang">AHC, hiçbir eğitim ya da siyasi kuruma bağlı olmayan bağımsız bir sivil gençlik hareketidir. Gençlerin donanım ve açık kaynak yazılım alanlarında teorik ve pratik becerilerini özgürce geliştirmesini ve bu bilgiyi dünyayla paylaşmasını sağlamak için varız.</span>
+  </p>
+
+  <div class="about-grid">
+    <div class="about-card">
+      <div class="about-card-icon">⚡</div>
+      <h3>
+        <span data-lang="en" class="inline-lang active">Hardware & Embedded</span>
+        <span data-lang="tr" class="inline-lang">Donanım & Gömülü</span>
+      </h3>
+      <p>
+        <span data-lang="en" class="inline-lang active">Microcontrollers, PCB design, soldering, 3D printing, and real-world electronics projects.</span>
+        <span data-lang="tr" class="inline-lang">Mikrodenetleyiciler, PCB tasarımı, lehimleme, 3D baskı ve gerçek dünya elektronik projeleri.</span>
+      </p>
+    </div>
+    <div class="about-card">
+      <div class="about-card-icon">🤖</div>
+      <h3>Robotics & DIY</h3>
+      <p>
+        <span data-lang="en" class="inline-lang active">Autonomous systems, robotics competitions, and hands-on maker culture at the core of everything we build.</span>
+        <span data-lang="tr" class="inline-lang">Otonom sistemler, robotik yarışmaları ve yaptığımız her şeyin özünde yer alan yapımcı kültürü.</span>
+      </p>
+    </div>
+    <div class="about-card">
+      <div class="about-card-icon">🌐</div>
+      <h3>Open Source</h3>
+      <p>
+        <span data-lang="en" class="inline-lang active">All schematics and code are released under GNU GPL v3 via our GitHub organization. Knowledge belongs to everyone.</span>
+        <span data-lang="tr" class="inline-lang">Tüm şemalar ve kodlar GitHub organizasyonumuz aracılığıyla GNU GPL v3 altında yayınlanır. Bilgi herkese aittir.</span>
+      </p>
+    </div>
+    <div class="about-card">
+      <div class="about-card-icon">🏛️</div>
+      <h3>
+        <span data-lang="en" class="inline-lang active">Independent & Horizontal</span>
+        <span data-lang="tr" class="inline-lang">Bağımsız & Yatay</span>
+      </h3>
+      <p>
+        <span data-lang="en" class="inline-lang active">No school affiliation. No hierarchical structure. Decisions made by two-thirds majority among members.</span>
+        <span data-lang="tr" class="inline-lang">Okul bağlantısı yok. Hiyerarşik yapı yok. Kararlar üyeler arasında üçte iki çoğunlukla alınır.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<section id="members">
+  <div class="section-label">02 —
+    <span data-lang="en" class="inline-lang active">Team</span>
+    <span data-lang="tr" class="inline-lang">Ekip</span>
+  </div>
+  <h2>
+    <span data-lang="en" class="inline-lang active">Founding Members</span>
+    <span data-lang="tr" class="inline-lang">Kurucu Üyeler</span>
+  </h2>
+
+  <div class="members-grid">
+    <div class="member-card">
+      <div class="member-avatar">OK</div>
+      <div class="member-name">Ozan Koçer</div>
+      <div class="member-role">
+        <span data-lang="en" class="inline-lang active">Co-Founder · Leader</span>
+        <span data-lang="tr" class="inline-lang">Kurucu Ortak · Lider</span>
+      </div>
+    </div>
+    <div class="member-card">
+      <div class="member-avatar">NEG</div>
+      <div class="member-name">Nusret Efe Gürlek</div>
+      <div class="member-role">
+        <span data-lang="en" class="inline-lang active">Co-Founder · Leader</span>
+        <span data-lang="tr" class="inline-lang">Kurucu Ortak · Lider</span>
+      </div>
+    </div>
+    <div class="member-card" style="border-style: dashed; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; min-height:130px;">
+      <div style="font-size:1.5rem; margin-bottom:0.5rem;">+</div>
+      <div class="member-role">
+        <span data-lang="en" class="inline-lang active">Membership open to all</span>
+        <span data-lang="tr" class="inline-lang">Üyelik herkese açık</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<section id="charter">
+  <div class="section-label">03 —
+    <span data-lang="en" class="inline-lang active">Charter</span>
+    <span data-lang="tr" class="inline-lang">Tüzük</span>
+  </div>
+  <h2>
+    <span data-lang="en" class="inline-lang active">Establishment Charter</span>
+    <span data-lang="tr" class="inline-lang">Kuruluş Tüzüğü</span>
+  </h2>
+
+  <div class="charter-box">
+    <div class="charter-meta">
+      <span data-lang="en" class="inline-lang active">Date of Entry into Force: 06.06.2026 · 8 Articles · Signed electronically by founding members</span>
+      <span data-lang="tr" class="inline-lang">Yürürlük Tarihi: 06.06.2026 · 8 Madde · Kurucu üyeler tarafından elektronik olarak imzalanmıştır</span>
+    </div>
+
+    <ul class="charter-articles">
+      <li>
+        <span class="art-num">Art.1</span>
+        <div class="art-body">
+          <h4>
+            <span data-lang="en" class="inline-lang active">Name & Abbreviation</span>
+            <span data-lang="tr" class="inline-lang">Ad & Kısaltma</span>
+          </h4>
+          <p>
+            <span data-lang="en" class="inline-lang active">The organization is named "Anatolia Hardware Club," abbreviated AHC.</span>
+            <span data-lang="tr" class="inline-lang">Organizasyonun adı "Anatolia Hardware Club" olup kısaltması AHC'dir.</span>
+          </p>
+        </div>
+      </li>
+      <li>
+        <span class="art-num">Art.2</span>
+        <div class="art-body">
+          <h4>
+            <span data-lang="en" class="inline-lang active">Structure & Independence</span>
+            <span data-lang="tr" class="inline-lang">Yapı & Bağımsızlık</span>
+          </h4>
+          <p>
+            <span data-lang="en" class="inline-lang active">AHC is independent — not affiliated with any school, college, or political institution. All decisions are made by member vote.</span>
+            <span data-lang="tr" class="inline-lang">AHC bağımsızdır — hiçbir okul, kolej veya siyasi kurumla bağlantısı yoktur. Tüm kararlar üye oylamasıyla alınır.</span>
+          </p>
+        </div>
+      </li>
+      <li>
+        <span class="art-num">Art.3</span>
+        <div class="art-body">
+          <h4>
+            <span data-lang="en" class="inline-lang active">Financial Responsibility</span>
+            <span data-lang="tr" class="inline-lang">Mali Sorumluluk</span>
+          </h4>
+          <p>
+            <span data-lang="en" class="inline-lang active">Finances are managed transparently via Hack Club Bank (HCB) under The Hack Foundation. All expenditures require joint approval from both founding leaders.</span>
+            <span data-lang="tr" class="inline-lang">Finansal işlemler, The Hack Foundation bünyesindeki Hack Club Bank (HCB) aracılığıyla şeffaf biçimde yönetilir. Tüm harcamalar her iki kurucu liderin onayını gerektirir.</span>
+          </p>
+        </div>
+      </li>
+      <li>
+        <span class="art-num">Art.4</span>
+        <div class="art-body">
+          <h4>
+            <span data-lang="en" class="inline-lang active">Membership</span>
+            <span data-lang="tr" class="inline-lang">Üyelik</span>
+          </h4>
+          <p>
+            <span data-lang="en" class="inline-lang active">Open to any young person interested in technology. Equal opportunity is a fundamental principle — regardless of school, race, religion, gender, or background.</span>
+            <span data-lang="tr" class="inline-lang">Teknolojiye ilgi duyan her gence açıktır. Fırsat eşitliği temel bir ilkedir — okul, ırk, din, cinsiyet veya geçmişten bağımsız olarak.</span>
+          </p>
+        </div>
+      </li>
+      <li>
+        <span class="art-num">Art.5</span>
+        <div class="art-body">
+          <h4>
+            <span data-lang="en" class="inline-lang active">Safety & Open Source</span>
+            <span data-lang="tr" class="inline-lang">Güvenlik & Açık Kaynak</span>
+          </h4>
+          <p>
+            <span data-lang="en" class="inline-lang active">Safety guidelines are mandatory during hardware work. All completed project schematics and code are shared under GNU GPL v3 on GitHub.</span>
+            <span data-lang="tr" class="inline-lang">Donanım çalışmaları sırasında güvenlik kurallarına uymak zorunludur. Tamamlanan projelerin tüm şemaları ve kodları GitHub'da GNU GPL v3 altında paylaşılır.</span>
+          </p>
+        </div>
+      </li>
+    </ul>
+
+    <div class="charter-dl">
+      <a href="https://anatolia-hardware-club.github.io/files/charter.pdf" class="btn btn-outline" target="_blank" rel="noopener">
+        <span data-lang="en" class="inline-lang active">↓ Download Full Charter (PDF)</span>
+        <span data-lang="tr" class="inline-lang">↓ Tüzüğü İndir (PDF)</span>
+      </a>
+      <span style="font-family:var(--mono);font-size:0.72rem;color:var(--muted);">
+        <span data-lang="en" class="inline-lang active">8 articles · Signed 06.06.2026</span>
+        <span data-lang="tr" class="inline-lang">8 madde · İmzalandı 06.06.2026</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<section id="contact">
+  <div class="section-label">04 —
+    <span data-lang="en" class="inline-lang active">Contact</span>
+    <span data-lang="tr" class="inline-lang">İletişim</span>
+  </div>
+  <h2>
+    <span data-lang="en" class="inline-lang active">Get in Touch</span>
+    <span data-lang="tr" class="inline-lang">Bize Ulaşın</span>
+  </h2>
+
+  <div class="contact-grid">
+    <a class="contact-item" href="mailto:anatoliahardwareclub@gmail.com">
+      <span class="contact-icon">✉️</span>
+      <div>
+        <div class="contact-label">Email</div>
+        <div class="contact-val">anatoliahardwareclub<wbr>@gmail.com</div>
+      </div>
+    </a>
+    <a class="contact-item" href="https://www.instagram.com/anatoliahardwareclub" target="_blank" rel="noopener">
+      <span class="contact-icon">📸</span>
+      <div>
+        <div class="contact-label">Instagram</div>
+        <div class="contact-val">@anatoliahardwareclub</div>
+      </div>
+    </a>
+    <a class="contact-item" href="https://github.com/Anatolia-Hardware-Club" target="_blank" rel="noopener">
+      <span class="contact-icon">🐙</span>
+      <div>
+        <div class="contact-label">GitHub</div>
+        <div class="contact-val">Anatolia-Hardware-Club</div>
+      </div>
+    </a>
+    <a class="contact-item" href="tel:05453167469">
+      <span class="contact-icon">📞</span>
+      <div>
+        <div class="contact-label">
+          <span data-lang="en" class="inline-lang active">Phone (Ozan)</span>
+          <span data-lang="tr" class="inline-lang">Telefon (Ozan)</span>
+        </div>
+        <div class="contact-val">0545 316 74 69</div>
+      </div>
+    </a>
+    <a class="contact-item" href="tel:05528550348">
+      <span class="contact-icon">📞</span>
+      <div>
+        <div class="contact-label">
+          <span data-lang="en" class="inline-lang active">Phone (Nusret)</span>
+          <span data-lang="tr" class="inline-lang">Telefon (Nusret)</span>
+        </div>
+        <div class="contact-val">0552 855 03 48</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Anatolia Hardware Club · Ankara, Turkey ·
+    <a href="https://github.com/Anatolia-Hardware-Club" target="_blank" rel="noopener">GitHub</a>
+    · Powered by
+    <a href="https://hackclub.com/bank/" target="_blank" rel="noopener">Hack Club Bank</a>
+  </p>
+</footer>
+
+<script>
+  function setLang(lang) {
+    // toggle data-lang blocks
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.classList.toggle('active', el.dataset.lang === lang);
+    });
+    // toggle inline-lang spans
+    document.querySelectorAll('.inline-lang').forEach(el => {
+      el.classList.toggle('active', el.dataset.lang === lang);
+    });
+    // toggle nav buttons
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-tr').classList.toggle('active', lang === 'tr');
+    document.documentElement.lang = lang;
+  }
+
+  // Smooth scroll offset for sticky nav
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - 70;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
 </html>
